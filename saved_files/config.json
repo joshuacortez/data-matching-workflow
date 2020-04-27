@@ -1,0 +1,40 @@
+{
+    "datasets":{
+        "febrl3":{"numeric_fields":[], "date_fields":["date_of_birth"], "primary_key":"rec_id", "pre_cluster_exact_matches":false},
+        "febrl4a":{"numeric_fields":[], "date_fields":["date_of_birth"], "primary_key":"rec_id", "pre_cluster_exact_matches":false},
+        "febrl4b":{"numeric_fields":[], "date_fields":["date_of_birth"], "primary_key":"rec_id", "pre_cluster_exact_matches":false}
+    },
+
+    "tasks":{
+        "dedup-febrl3":
+                {"recall_train":1.0,
+                "fields":[
+                        {"field":"street_number","type":"ShortString", "has missing":true},
+                        {"field":"postcode","type":"ShortString"},
+                        {"field":"state", "type":"ShortString", "has missing":true},
+                        {"field":"soc_sec_id", "type":"ShortString"},
+                        {"field":"given_name", "type":"String", "has missing":true},
+                        {"field":"surname", "type":"String", "has missing":true},
+                        {"field":"address_1", "type":"String", "has missing":true},
+                        {"field":"address_2", "type":"String", "has missing":true},
+                        {"field":"suburb", "type":"String", "has missing":true},
+                        {"field":"date_of_birth", "type":"DateTime", "has missing":true, "fuzzy":false, "yearfirst":true}
+                    ]
+                },
+        "rl-febrl4a_febrl4b":
+                {"recall_train":1.0,
+                    "fields":[
+                    {"field":"street_number","type":"ShortString", "has missing":true},
+                    {"field":"postcode","type":"ShortString"},
+                    {"field":"state", "type":"ShortString", "has missing":true},
+                    {"field":"soc_sec_id", "type":"ShortString"},
+                    {"field":"given_name", "type":"String", "has missing":true},
+                    {"field":"surname", "type":"String", "has missing":true},
+                    {"field":"address_1", "type":"String", "has missing":true},
+                    {"field":"address_2", "type":"String", "has missing":true},
+                    {"field":"suburb", "type":"String", "has missing":true},
+                    {"field":"date_of_birth", "type":"DateTime", "has missing":true, "fuzzy":false, "yearfirst":true}
+                    ]
+                }
+    }
+}

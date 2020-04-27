@@ -1,0 +1,27 @@
+variable,logistic_reg_weight
+(postcode: ShortString),-4.044692479274235
+(soc_sec_id: ShortString),-3.7860452831422142
+(address_1: String),-3.3981633499862407
+(given_name: String),-2.9998254863439975
+(street_number: ShortString),-2.2748383758166866
+(suburb: String),-2.221104712892982
+(surname: String),-1.70656179007656
+(state: ShortString),-1.3476995381515988
+(days: Derived),-0.08892597538698832
+(seconds: Dummy),0.01051645382946893
+(months: Dummy),0.01051645382946893
+(years: Dummy),0.01051645382946893
+(seconds: Derived),0.01051645382946893
+(months: Derived),0.01051645382946893
+(years: Derived),0.01051645382946893
+(full string: Derived),0.01051645382946893
+(address_2: String),0.7593784199236783
+((surname: String): Not Missing),0.7790734306944296
+((state: ShortString): Not Missing),1.5940846689645816
+(date_of_birth: Not Missing: Dummy),1.7173384526471382
+(days: Dummy),1.7173384526471382
+((given_name: String): Not Missing),1.8428391599631309
+((address_1: String): Not Missing),2.6188362919483246
+((street_number: ShortString): Not Missing),3.1283945747031874
+((suburb: String): Not Missing),3.154450618229947
+((address_2: String): Not Missing),4.178256655125389
