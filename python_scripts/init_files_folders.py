@@ -220,6 +220,15 @@ def check_notebook_files(parent_directory = ".."):
 
     print("Notebook filenames all correct!")
 
+def rename_and_make_notebooks_dir(parent_directory = ".."):
+    # rename notebooks to prototype_notebooks
+    notebooks_folderpath = os.path.join(parent_directory, "notebooks")
+    prototype_notebooks_folderpath = os.path.join(parent_directory, "prototype_notebooks")
+    os.rename(src = notebooks_folderpath, dst = prototype_notebooks_folderpath)
+
+    # make empty notebooks folder that will be filled later
+    os.mkdir(notebooks_folderpath)
+
 if __name__ == "__main__":
     notice = """
             Run this script only after doing the following in the main project folder:
@@ -238,6 +247,7 @@ if __name__ == "__main__":
             valid_response = True
         
         if user_input == "y":
+            rename_and_make_notebooks_dir()
             make_directories()
             copy_prototype_notebooks()
             check_notebook_files()
