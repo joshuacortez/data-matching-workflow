@@ -156,14 +156,6 @@ def map_cluster_ids(deduper, unlabeled_data, threshold,
     pair_scores = deduper.score(pairs)
     clustered_dupes = deduper.cluster(pair_scores, threshold)
 
-    # delete temporary file generated for pair_scores
-    try:
-        mmap_file = pair_scores.filename
-        del pair_scores
-        os.remove(mmap_file)
-    except AttributeError:
-        pass
-
     if numeric_fields is not None:
         assert isinstance(numeric_fields, list)
     
