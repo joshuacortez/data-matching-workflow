@@ -15,4 +15,4 @@ dependencies:
   - pip
   - pip:
     - recordlinkage
-    - dedupe
+    - dedupe==2.0.2
