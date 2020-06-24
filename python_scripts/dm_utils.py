@@ -234,6 +234,14 @@ def map_cluster_ids(deduper, unlabeled_data, threshold,
     else:
         cluster_canonicals = None
 
+    # delete temporary file generated for pair_scores	
+    try:	
+        mmap_file = pair_scores.filename	
+        del pair_scores	
+        os.remove(mmap_file)	
+    except AttributeError:	
+        pass
+
     if canonicalize:
         return mapped_records, cluster_canonicals
     else:
