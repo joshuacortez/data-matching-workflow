@@ -99,7 +99,7 @@ def get_model_weights(deduper_or_linker):
 
     return model_weights
 
-def map_cluster_ids(deduper, unlabeled_data, threshold, 
+def map_cluster_ids(deduper, unlabeled_data, threshold, hard_threshold = 0.0,
                     blocked_data = None, canonicalize = True, numeric_fields = None,
                     cluster_id_tag = None, 
                     mapped_records_filepath = None,
@@ -116,6 +116,8 @@ def map_cluster_ids(deduper, unlabeled_data, threshold,
             The dedupe formatted data dictionary.
         threshold : dedupe.Threshold
             The threshold used for clustering.
+        hard_threshold: float
+            Threshold for record pair scores that will be included in the clustering
         canonicalize : bool or list, default False
             Option that provides the canonical records as additional columns.
             Specifying a list of column names only canonicalizes those columns.
@@ -130,6 +132,8 @@ def map_cluster_ids(deduper, unlabeled_data, threshold,
         cluster_canonicals
             A dataframe storing the canonical representation per cluster_id
     """
+
+    assert (hard_threshold < 1) and (hard_threshold >= 0), "hard_threshold should less than 1 at at least 0.0"
     
     if mapped_records_filepath is not None:
         with open(mapped_records_filepath, "w", newline = "") as f:
@@ -154,6 +158,7 @@ def map_cluster_ids(deduper, unlabeled_data, threshold,
         pairs = itertools.chain.from_iterable(get_blocked_pairs(deduper, blocked_data))
 
     pair_scores = deduper.score(pairs)
+    pair_scores = pair_scores[pair_scores["score"] > hard_threshold]
     clustered_dupes = deduper.cluster(pair_scores, threshold)
 
     if numeric_fields is not None:
