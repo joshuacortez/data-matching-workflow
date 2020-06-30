@@ -288,7 +288,7 @@ def get_canonical_rep(record_cluster, numeric_fields = None):
 
     return canonical_rep
 
-def get_linked_ids(linker, unlabeled_data_1, unlabeled_data_2, threshold, blocked_data = None, 
+def get_linked_ids(linker, unlabeled_data_1, unlabeled_data_2, threshold, hard_threshold = 0.0, blocked_data = None, 
                     mapped_records_filepath = None, constraint = "one-to-one"):
     # BADLY NEED TO REFACTOR THIS
     """
@@ -331,6 +331,7 @@ def get_linked_ids(linker, unlabeled_data_1, unlabeled_data_2, threshold, blocke
         pairs = itertools.chain.from_iterable(get_blocked_pairs(linker, blocked_data))
 
     pair_scores = linker.score(pairs)
+    pair_scores = pair_scores[pair_scores["score"] > hard_threshold]
 
     assert constraint in {'one-to-one', 'many-to-one', 'many-to-many'}, (
             '%s is an invalid constraint option. Valid options include '
